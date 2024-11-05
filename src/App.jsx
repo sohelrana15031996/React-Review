@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import './App.css'
+import EventHandler from './Components/EventHandler.JSX'
 import Greetings from './Components/Greetings'
+import ShowName from './Components/ShowName'
 
 function App() {
   const employees = [
@@ -39,14 +42,22 @@ function App() {
       bestRegards: 'ARUP'
     },
   ]
-
-
+  const [name, setName] = useState('')
+  function handleClick(e){
+    e.preventDefault();
+    ;
+    console.log(e.target.elements.getName.value);
+    setName(e.target.elements.getName.value);
+    e.target.elements.getName.value = '';
+  }
   return (
     <>
       <div className='grid grid-cols-2'>
         {
           employees.map(employee => <Greetings key={employee.id} employee={employee} ></Greetings>)
         }
+        <EventHandler handleClick={handleClick}></EventHandler>
+        <ShowName name={name}></ShowName>
       </div>
 
     </>
